@@ -21,5 +21,4 @@ yarn-error.log*
 *.sw?
 
 
-/private
 /private/keys.js
