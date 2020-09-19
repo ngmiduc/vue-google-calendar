@@ -13,9 +13,9 @@
 </template>
 
 <script>
-import CalendarColumn from "./CalendarColumn"
+import CalendarColumn from "./CalendarColumn.vue"
 
-import * as fn from "@/utils/functions"
+import * as fn from "../utils/functions"
 
 export default {
   name: "calendar",

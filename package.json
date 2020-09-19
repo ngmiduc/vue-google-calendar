@@ -4,14 +4,16 @@
   "description": "vuejs google week calendar",
   "author": "Nguyen Minh Duc",
   "license": null,
-  "main": "./dist/index.js",
-  "files": [
-    "dist/*"
-  ],
+  "main": "dist/vue-google-calendar.umd.js",
+  "module": "dist/vue-google-calendar.esm.js",
+  "unpkg": "dist/vue-google-calendar.min.js",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name myLib src/calendar/Calendar.vue"
+    "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
+    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/vue-google-calendar.umd.js",
+    "build:es": "rollup --config build/rollup.config.js --format es --file dist/vue-google-calendar.esm.js",
+    "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/vue-google-calendar.min.js"
   },
   "dependencies": {
     "core-js": "^2.6.11",
@@ -29,6 +31,10 @@
     "node-sass": "^4.14.1",
     "sass-loader": "^7.3.1",
     "vue-loader": "^15.9.3",
-    "vue-template-compiler": "^2.6.12"
+    "vue-template-compiler": "^2.6.12",
+    "rollup": "^1.17.0",
+    "@rollup/plugin-buble": "^0.21.3",
+    "@rollup/plugin-commonjs": "^11.1.0",
+    "rollup-plugin-vue": "^5.0.1"
   }
 }
