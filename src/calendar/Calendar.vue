@@ -144,6 +144,7 @@ export default {
 
 .cal-wrapper {
   height: 100%;
+  width: 100%;
   position: relative;
   border: 0.1px solid rgba(164, 164, 164, 0.25);
   box-shadow: 0 0 25px 5px rgba(135, 137, 182, 0.2);
