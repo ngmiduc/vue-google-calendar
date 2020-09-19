@@ -37,6 +37,8 @@
 <script>
 import CalendarEvent from "./CalendarEvent"
 
+import * as fn from "@/utils/functions"
+
 export default {
   name: "calendarcolumn",
   components: {
@@ -63,35 +65,18 @@ export default {
   },
   computed: {
     positioning() {
-      function diff_minutes(dt2, dt1) {
-        var diff = (dt2.getTime() - dt1.getTime()) / 1000
-        diff /= 60
-        return Math.abs(Math.round(diff))
-      }
-
-      function isBefore(d1, d2) {
-        return d1.getTime() < d2.getTime()
-      }
-      function isAfter(d1, d2) {
-        return d1.getTime() > d2.getTime()
-      }
-
-      function isSame(d1, d2) {
-        return d1.getTime() === d2.getTime()
-      }
-
       if (!this.data) return []
       return [...this.data]
         .sort((a, b) =>
-          isSame(a.grid.start, b.grid.start)
+          fn.isSame(a.grid.start, b.grid.start)
             ? b.grid.dur - a.grid.dur
-            : diff_minutes(a.grid.start, b.grid.start)
+            : fn.diffMinutes(a.grid.start, b.grid.start)
         )
         .map(item => {
           let block = this.data.filter(
             i =>
-              isBefore(i.grid.start, item.grid.start) &&
-              isAfter(i.grid.end, item.grid.start)
+              fn.isBefore(i.grid.start, item.grid.start) &&
+              fn.isAfter(i.grid.end, item.grid.start)
           )
           if (block.length == 0) {
             item.grid["indent"] = 0
@@ -107,7 +92,7 @@ export default {
           }
 
           let same = this.data.filter(i =>
-            isSame(i.grid.start, item.grid.start)
+            fn.isSame(i.grid.start, item.grid.start)
           )
 
           if (same.length <= 1) {

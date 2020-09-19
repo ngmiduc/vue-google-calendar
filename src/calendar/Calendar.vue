@@ -15,6 +15,8 @@
 <script>
 import CalendarColumn from "./CalendarColumn"
 
+import * as fn from "@/utils/functions"
+
 export default {
   name: "calendar",
   components: { CalendarColumn },
@@ -37,23 +39,10 @@ export default {
 
   computed: {
     days() {
-      function getMonday(d) {
-        d = new Date(d)
-        var day = d.getDay(),
-          diff = d.getDate() - day + (day == 0 ? -6 : 1)
-        return new Date(d.setDate(diff))
-      }
-
-      function addOnDay(date, amount) {
-        const d = date
-        d.setDate(d.getDate() + amount)
-        return d
-      }
-
       let result = []
 
       for (var i = 0; i < 7; i++) {
-        result.push(addOnDay(getMonday(new Date()), i))
+        result.push(fn.addDays(fn.getMonday(new Date()), i))
       }
       return result
     },
@@ -79,12 +68,6 @@ export default {
         t.setSeconds(0)
         t.setMilliseconds(0)
         return t
-      }
-
-      function diff_minutes(dt2, dt1) {
-        var diff = (dt2.getTime() - dt1.getTime()) / 1000
-        diff /= 60
-        return Math.abs(Math.round(diff))
       }
 
       let tmp = {
@@ -123,9 +106,9 @@ export default {
                       ),
                 dur:
                   start.getTime() != end.getTime()
-                    ? Math.round(diff_minutes(end, start) / this.precision)
+                    ? Math.round(fn.diffMinutes(end, start) / this.precision)
                     : Math.round(
-                        (diff_minutes(end, start) + this.precision) /
+                        (fn.diffMinutes(end, start) + this.precision) /
                           this.precision
                       )
               }

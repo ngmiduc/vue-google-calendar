@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import * as fn from "@/utils/functions"
+
 export default {
   name: "calendareventv2",
   props: {
@@ -68,27 +70,10 @@ export default {
     },
 
     getPos({ start, end, indent, index, indexOf }) {
-      function isBefore(d1, d2) {
-        return d1.getTime() < d2.getTime()
-      }
-      function isAfter(d1, d2) {
-        return d1.getTime() > d2.getTime()
-      }
-
-      function isSame(d1, d2) {
-        return d1.getTime() === d2.getTime()
-      }
-
-      function diff_minutes(dt2, dt1) {
-        var diff = (dt2.getTime() - dt1.getTime()) / 1000
-        diff /= 60
-        return Math.abs(Math.round(diff))
-      }
-
       //set events into position with indent index absolute position
 
       let offset = start.getMinutes() + start.getHours() * 60
-      let duration = diff_minutes(start, end)
+      let duration = fn.diffMinutes(start, end)
 
       if (this.opened) {
         return {
