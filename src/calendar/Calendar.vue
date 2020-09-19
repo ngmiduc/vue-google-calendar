@@ -1,19 +1,14 @@
 <template>
   <div class="cal-wrapper">
-    <div class="loader" v-if="loading">
-      LOADING
-    </div>
-    <div class="cal" :class="{ loading: loading }" ref="cal">
+    <div class="cal" ref="cal">
       <calendar-column
         v-for="(value, name, index) in concatenatedData"
         :data="value"
         :day="days[index]"
         :key="name"
         :precision="precision"
-        :readOnly="readOnly"
+        :readOnly="true"
         :color="color"
-        :contacts="contacts"
-        :overlapping="overlapping"
         @deleteEvent="$emit('deleteEvent', $event)"
         @createEvent="createEvent(days[index], $event)"
         @invite="$emit('invite', $event)"
@@ -24,24 +19,18 @@
 
 <script>
 import CalendarColumn from "./CalendarColumn"
-import Vue from "vue"
-import Component from "vue-class-component"
 
 export default {
   name: "calendar",
   components: { CalendarColumn },
   props: {
-    overlapping: Boolean,
     precision: { type: Number, default: 30 },
     readOnly: { type: Boolean, default: false },
-
-    loading: Boolean,
 
     data: Array,
     selected: Date,
 
-    color: { type: String, default: "#4986e7" },
-    contacts: { type: Array, default: () => [] }
+    color: { type: String, default: "#4986e7" }
   },
 
   mounted() {
@@ -56,7 +45,6 @@ export default {
 
   computed: {
     days() {
-      let start = this.$moment(this.selected).startOf("isoWeek")
       let result = []
 
       for (var i = 0; i < 7; i++) {
@@ -180,48 +168,21 @@ export default {
 .cal-wrapper {
   height: 100%;
   position: relative;
-  border: 0.1vmin solid grey;
-  border-radius: 0.5vmin;
+  border: 0.1px solid rgba(164, 164, 164, 0.5);
+  box-shadow: 0 15px 5px rgba(135, 137, 182, 0.42);
+  border-radius: 10px;
+  overflow: hidden;
 
-  .loader {
-    position: absolute;
+  .cal {
+    overflow-y: scroll;
+    background-color: white;
+
     height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    user-select: none;
 
-    z-index: 200;
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 300%;
   }
-}
-
-.cal {
-  overflow-y: scroll;
-  /* overflow-x: hidden; */
-  background-color: white;
-  border-radius: 0.25rem;
-
-  height: 100%;
-  user-select: none;
-
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: 300%;
-
-  &.loading {
-    overflow: hidden;
-  }
-}
-
-.block {
-  opacity: 0.5;
-  cursor: wait;
 }
 </style>

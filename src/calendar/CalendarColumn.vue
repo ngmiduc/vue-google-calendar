@@ -1,21 +1,21 @@
 <template>
   <div
-    class="col"
+    class="cal-column"
     :class="{ selected: active, 'border-left': day.isoWeekday() != 1 }"
   >
     <div
-      class="header"
+      class="cal-column-header"
       :class="{ frst: day.isoWeekday() == 1, lst: day.isoWeekday() == 7 }"
     >
       <span class="dayname">{{ day | moment("dddd") }}</span>
       <span class="daynum">{{ day | moment("D") }}</span>
     </div>
 
-    <div class="column-body">
-      <div class="slotgrid">
+    <div class="cal-column-body">
+      <div class="cal-column-body-slotgrid">
         <div class="lines" v-for="n in 24" :key="`${n}`">{{ n }}:00</div>
       </div>
-      <div class="eventgrid">
+      <div class="cal-column-body-eventgrid">
         <div
           class="index"
           v-if="$moment().isSame(day, 'day')"
@@ -29,12 +29,11 @@
           v-for="(e, index) in positioning"
           :key="index"
           :data="e"
-          :contacts="contacts"
         ></calendar-event>
       </div>
 
       <calendar-edit
-        class="editgrid"
+        class="cal-column-body-editgrid"
         :style="{ zIndex: editing ? 4 : 1 }"
         v-if="!readOnly"
         @edit="editing = $event"
@@ -42,7 +41,6 @@
         :editPrecision="precision"
         :block="blockingElements"
         :color="color"
-        :contacts="contacts"
       ></calendar-edit>
     </div>
   </div>
@@ -65,8 +63,7 @@ export default {
     day: Object,
     data: Array,
 
-    color: String,
-    contacts: Array
+    color: String
   },
   data() {
     return {
@@ -85,12 +82,12 @@ export default {
   computed: {
     blockingElements() {
       if (!this.data) return []
-      return this.data.filter(item => item.type === "slot")
+      return [...this.data].filter(item => item.type === "slot")
     },
 
     positioning() {
       if (!this.data) return []
-      return this.data
+      return [...this.data]
         .sort((a, b) =>
           a.grid.start.isSame(b.grid.start)
             ? b.grid.dur - a.grid.dur
@@ -141,23 +138,17 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.col {
+.cal-column {
   height: inherit;
-  display: flex;
-  flex-direction: column;
   z-index: 3;
 
   &.border-left {
-    border-left: 0.025rem solid rgba(0, 0, 0, 0.2);
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
   }
 
-  &.selected {
-    z-index: 4;
-  }
-
-  .header {
-    border-bottom: 0.025rem solid rgba(0, 0, 0, 0.2);
-    padding: 0.6rem 0.5rem;
+  .cal-column-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 10px;
     background-color: rgba(255, 255, 255, 1);
     color: black;
     display: flex;
@@ -169,35 +160,22 @@ export default {
     top: 0;
     z-index: 100;
 
-    &.frst {
-      // border-top-left-radius: 0.25rem;
-    }
-
-    &.lst {
-      // border-top-right-radius: 0.25rem;
-    }
-
-    &:not(.frst) {
-      border-left: 0.025rem solid rgba(0, 0, 0, 0.1);
-    }
-
     .dayname {
-      font-size: 0.5rem;
+      font-size: 16px;
       text-transform: uppercase;
     }
     .daynum {
-      font-size: 1.5rem;
+      font-size: 20px;
     }
   }
 
-  .column-body {
+  .cal-column-body {
     position: relative;
-    flex-grow: 2;
     height: 100%;
 
-    .slotgrid,
-    .eventgrid,
-    .editgrid {
+    .cal-column-body-slotgrid,
+    .cal-column-body-eventgrid,
+    .cal-column-body-editgrid {
       position: absolute;
       top: 0;
       left: 0;
@@ -206,45 +184,47 @@ export default {
       height: 100%;
     }
 
-    .eventgrid {
-      right: 0.5rem;
+    .cal-column-body-eventgrid {
+      right: 5px;
 
       .index {
         position: absolute;
         background-color: rgba(255, 0, 0, 0.5);
-        left: 0.125rem;
-        right: -0.5rem;
-        height: 0.05rem;
+        left: 0px;
+        right: -5px;
+        height: 10px;
         z-index: 10;
+        border-radius: 2px;
       }
     }
-    .editgrid {
-      left: 0.5rem;
+
+    .cal-column-body-editgrid {
+      left: 0px;
     }
-  }
 
-  .slotgrid {
-    display: grid;
-    grid-template-rows: repeat(24, 1fr);
-    z-index: 1;
+    .cal-column-body-slotgrid {
+      display: grid;
+      grid-template-rows: repeat(24, 1fr);
+      z-index: 1;
 
-    .lines {
-      color: rgba(200, 200, 200, 0.9);
-      padding: 0 0.1rem;
-      text-align: right;
-      /* letter-spacing: 0.01rem; */
-      font-size: 0.45rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      user-select: none;
+      .lines {
+        color: rgba(200, 200, 200, 0.9);
+        padding: 0 0.1rem;
+        text-align: right;
+        /* letter-spacing: 0.01rem; */
+        font-size: 0.45rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        user-select: none;
 
-      &:not(:first-child) {
-        border-top: 0.025rem solid rgba(0, 0, 0, 0.2);
-      }
+        &:not(:first-child) {
+          border-top: 0.025rem solid rgba(0, 0, 0, 0.2);
+        }
 
-      &:hover {
-        /* background-color: black; */
+        &:hover {
+          /* background-color: black; */
+        }
       }
     }
   }

@@ -34,7 +34,7 @@
 
       <div class="move" @mousedown="startMove"></div>
 
-      <div class="content" v-popover:creation>
+      <div class="content">
         <div class="text">
           {{
             $moment("2013-01-01T00:00:00.000")
@@ -128,7 +128,7 @@ export default {
       this.editstate = true
       this.resize = direction
     },
-    endDrag(n) {
+    endDrag() {
       if (this.editstate) {
         this.editstate = false
         this.resize = null
@@ -149,7 +149,7 @@ export default {
       )
     },
 
-    slotsCollide(n) {
+    slotsCollide() {
       let collision = false
       this.block.forEach(slot => {
         let slotStart = this.timeToNumber(slot.start)
@@ -185,7 +185,7 @@ export default {
     },
 
     drag(n) {
-      if (!!this.resize) {
+      if (this.resize) {
         if (this.resize == "up") {
           this.dragStart = n
         } else if (this.resize == "down") this.dragEnd = n

@@ -1,10 +1,10 @@
 <template>
   <div
-    class="cal-popover-overlap"
+    class="cal-event"
     :style="getPos(data.grid)"
     :class="{ selected: opened }"
   >
-    <div class="content" :style="getColor">
+    <div class="cal-event-content" :style="getColor" @click="opened = !opened">
       {{ data.e.summary }}
     </div>
   </div>
@@ -14,8 +14,7 @@
 export default {
   name: "calendareventv2",
   props: {
-    data: Object,
-    contacts: Array
+    data: Object
   },
   data() {
     return {
@@ -37,7 +36,7 @@ export default {
 
     multicolor(c) {
       let string = "repeating-linear-gradient(45deg"
-      let stripe = 100 / c.length
+      let stripe = 50 / c.length
       for (var i = 0; i < c.length; i++) {
         string += `,${c[i]} ${stripe * i}%, ${c[i]} ${stripe * (i + 1)}%`
       }
@@ -58,7 +57,7 @@ export default {
       return outputX + "%"
     },
 
-    getPos({ start, end, dur, indent, index, indexOf }) {
+    getPos({ start, end, indent, index, indexOf }) {
       //set events into position with indent index absolute position
 
       let offset = start.minutes() + start.hours() * 60
@@ -118,34 +117,41 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.cal-popover-overlap {
+.cal-event {
   z-index: 2;
   position: relative;
+  opacity: 0.95;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid white;
 
-  .content {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    font-size: 1.5vmin;
+  transition: all 50ms;
 
-    overflow: hidden;
-    border: 0.1vmin solid white;
-    border-radius: 0.25vmin;
-
-    padding: 1vmin;
-
-    position: absolute;
-    top: 0.15vmin;
-    left: 0.15vmin;
-    bottom: 0.15vmin;
-    right: 0.15vmin;
+  &:hover {
+    transition: all 250ms;
+    opacity: 1;
+    cursor: pointer;
+    transform: scale(1.025);
   }
 
   &.selected {
-    border-radius: 0.3rem;
-    z-index: 10;
+    transition: all 250ms;
+    z-index: 100;
     min-height: 40px;
-    box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 07.5);
+    box-shadow: 5px 5px 20px 0px rgba(109, 126, 135, 0.56);
+  }
+
+  .cal-event-content {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-size: 1.5vmin;
   }
 }
 </style>
