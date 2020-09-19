@@ -1,11 +1,17 @@
 {
   "name": "vue-google-calendar",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "vuejs google week calendar",
+  "author": "Nguyen Minh Duc",
+  "license": null,
+  "main": "./dist/index.js",
+  "files": [
+    "dist/*"
+  ],
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "webpack --config config/webpack.config.js"
+    "build": "bili --name index --plugin vue --vue.css false"
   },
   "dependencies": {
     "core-js": "^2.6.11",
@@ -22,6 +28,9 @@
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.2.3",
     "node-sass": "^4.14.1",
+    "rollup-plugin-buble": "^0.19.8",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-vue": "^5.1.9",
     "sass-loader": "^7.3.1",
     "vue-loader": "^15.9.3",
     "vue-template-compiler": "^2.6.12"
