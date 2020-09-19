@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="cal-column"
-    :class="{ selected: active, 'border-left': day.isoWeekday() != 1 }"
-  >
+  <div class="cal-column" :class="{ selected: active }">
     <div
       class="cal-column-header"
       :class="{ frst: day.isoWeekday() == 1, lst: day.isoWeekday() == 7 }"
@@ -13,7 +10,13 @@
 
     <div class="cal-column-body">
       <div class="cal-column-body-slotgrid">
-        <div class="lines" v-for="n in 24" :key="`${n}`">{{ n }}:00</div>
+        <div
+          class="cal-column-body-slotgrid--lines"
+          v-for="n in 24"
+          :key="`${n}`"
+        >
+          {{ n }}:00
+        </div>
       </div>
       <div class="cal-column-body-eventgrid">
         <div
@@ -23,47 +26,27 @@
         ></div>
 
         <calendar-event
-          @active="active = $event"
-          @deleteEvent="$emit('deleteEvent', $event)"
-          @invite="$emit('invite', $event)"
           v-for="(e, index) in positioning"
           :key="index"
           :data="e"
         ></calendar-event>
       </div>
-
-      <calendar-edit
-        class="cal-column-body-editgrid"
-        :style="{ zIndex: editing ? 4 : 1 }"
-        v-if="!readOnly"
-        @edit="editing = $event"
-        @createEvent="$emit('createEvent', $event)"
-        :editPrecision="precision"
-        :block="blockingElements"
-        :color="color"
-      ></calendar-edit>
     </div>
   </div>
 </template>
 
 <script>
 import CalendarEvent from "./CalendarEvent"
-import CalendarEdit from "./CalendarEdit"
 
 export default {
   name: "calendarcolumn",
   components: {
-    CalendarEdit,
     CalendarEvent
   },
   props: {
-    readOnly: Boolean,
     precision: Number,
-
     day: Object,
-    data: Array,
-
-    color: String
+    data: Array
   },
   data() {
     return {
@@ -80,11 +63,6 @@ export default {
     this.scrollPercent = ((minutes - 0) / (60 * 24 - 0)) * (100 - 0) + 0
   },
   computed: {
-    blockingElements() {
-      if (!this.data) return []
-      return [...this.data].filter(item => item.type === "slot")
-    },
-
     positioning() {
       if (!this.data) return []
       return [...this.data]
@@ -149,7 +127,7 @@ export default {
   .cal-column-header {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     padding: 10px;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(240, 240, 240, 1);
     color: black;
     display: flex;
     align-items: center;
@@ -158,7 +136,7 @@ export default {
     position: sticky;
     position: -webkit-sticky;
     top: 0;
-    z-index: 100;
+    z-index: 200;
 
     .dayname {
       font-size: 16px;
@@ -185,7 +163,7 @@ export default {
     }
 
     .cal-column-body-eventgrid {
-      right: 5px;
+      right: 15px;
 
       .index {
         position: absolute;
@@ -198,32 +176,23 @@ export default {
       }
     }
 
-    .cal-column-body-editgrid {
-      left: 0px;
-    }
-
     .cal-column-body-slotgrid {
       display: grid;
       grid-template-rows: repeat(24, 1fr);
       z-index: 1;
 
-      .lines {
+      .cal-column-body-slotgrid--lines {
         color: rgba(200, 200, 200, 0.9);
-        padding: 0 0.1rem;
+        padding: 0 2px;
         text-align: right;
-        /* letter-spacing: 0.01rem; */
-        font-size: 0.45rem;
+        font-size: 14px;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
         user-select: none;
 
         &:not(:first-child) {
-          border-top: 0.025rem solid rgba(0, 0, 0, 0.2);
-        }
-
-        &:hover {
-          /* background-color: black; */
+          border-top: 1px solid rgba(170, 170, 170, 0.2);
         }
       }
     }

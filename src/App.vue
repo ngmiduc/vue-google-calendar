@@ -3,12 +3,7 @@
     <calendar
       :data="calendarData"
       :selected="selectedDate"
-      :precision="15"
-      @deleteEvent="() => null"
-      @create1v1="() => null"
-      @createLecture="() => null"
-      @createSlot="() => null"
-      @invite="() => null"
+      :precision="60"
     ></calendar>
   </div>
 </template>
@@ -61,14 +56,20 @@ html {
   margin: 0;
 }
 
+body {
+  background-color: lightgrey;
+  height: 100vh;
+}
+
 * {
   font-family: "Roboto Condensed", sans-serif;
   font-weight: lighter;
+  color: rgb(96, 96, 96);
 }
 
 .page {
-  height: calc(100vh - 2vmin);
-  padding: 1vmin;
-  background-color: lightgrey;
+  height: 100%;
+  padding: 50px 60px;
+  box-sizing: border-box;
 }
 </style>

@@ -23,17 +23,27 @@ export default {
   },
   computed: {
     getColor() {
+      const getContrastColor = color => {
+        // Counting the perceptive luminance - human eye favors green color...
+        const R = parseInt(color[1] + color[2], 16)
+        const G = parseInt(color[3] + color[4], 16)
+        const B = parseInt(color[5] + color[6], 16)
+
+        const luminance = (0.299 * R + 0.587 * G + 0.114 * B) / 255
+
+        return luminance > 0.5 ? "#454545" : "#FFFFFF"
+      }
+
       if (Array.isArray(this.data.color)) {
         return { background: this.multicolor(this.data.color) }
-      } else return { backgroundColor: this.data.owner.color }
+      } else
+        return {
+          backgroundColor: this.data.owner.color,
+          color: getContrastColor(this.data.owner.color)
+        }
     }
   },
   methods: {
-    activate(value) {
-      this.opened = value
-      this.$emit("active", value)
-    },
-
     multicolor(c) {
       let string = "repeating-linear-gradient(45deg"
       let stripe = 50 / c.length
@@ -66,9 +76,8 @@ export default {
       if (this.opened) {
         return {
           position: "absolute",
-          right: "-0.5rem",
-          // width: "100%",
-          left: "0.25rem",
+          right: "0px",
+          left: "2.5px",
           top: this.timeToPercent(offset),
           height: this.durationToPercent(duration)
         }
@@ -123,7 +132,7 @@ export default {
   opacity: 0.95;
   border-radius: 4px;
   overflow: hidden;
-  border: 1px solid white;
+  border: 1px solid rgb(222, 222, 222);
 
   transition: all 50ms;
 
@@ -144,7 +153,7 @@ export default {
   .cal-event-content {
     width: 100%;
     height: 100%;
-    padding: 10px;
+    padding: 4px;
 
     box-sizing: border-box;
 
@@ -152,6 +161,8 @@ export default {
     align-items: flex-start;
     justify-content: flex-start;
     font-size: 1.5vmin;
+
+    color: #454545;
   }
 }
 </style>
