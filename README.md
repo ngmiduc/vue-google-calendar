@@ -11,7 +11,6 @@ VueJs Week Calendar based on Google Calendar API.
 and use it in your component file
 
 ```
-
 <template>
   <vue-google-calendar :data="calendarData"/>
 </template>
