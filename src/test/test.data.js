@@ -1,7 +1,7 @@
 export default [
   {
-    id: "nguyen@goarthur.ai",
-    summary: "nguyen@goarthur.ai",
+    id: "nguyen@test-email.ai",
+    summary: "nguyen@test-email.ai",
     color: "#d4ff74",
     dates: [
       {
@@ -103,8 +103,8 @@ export default [
     ]
   },
   {
-    id: "minh@goarthur.ai",
-    summary: "minh@goarthur.ai",
+    id: "minh@test-email.ai",
+    summary: "minh@test-email.ai",
     color: "#4986e7",
     dates: [
       {
@@ -206,106 +206,106 @@ export default [
     ]
   },
   {
-    id: "gregory@goarthur.ai",
-    summary: "Gregory - AI",
+    id: "test-user@test-email.ai",
+    summary: "test-user - AI",
     color: "#ffad46",
     dates: [
       {
         id:
           "1g8go31g60o30c1g60o30c1g60o32c1g60o30c1g6p24cdph8gpjch9o8go3ehhk84s42gpj6so34hi56gr4ae1h8h30",
-        summary: "Discussions préliminaires - Brevet & HR",
+        summary: "Discussions s - ER & HR",
         start: { dateTime: "2020-09-14T15:00:00-04:00" },
         end: { dateTime: "2020-09-14T16:00:00-04:00" }
       },
       {
         id: "21oc0dd63l3ggmscnk78pialdt",
-        summary: "Brahm <> Gregory",
+        summary: "Test <> test-user",
         start: { dateTime: "2020-09-15T10:00:00-04:00" },
         end: { dateTime: "2020-09-15T10:30:00-04:00" }
       },
       {
         id: "rsf2d61pr8hmt0q6tu8ntauqts",
-        summary: "Meeting with Brahm Glickman from the IA Quebec book project",
+        summary: "Hi with Test Glickman from the IA DEU book project",
         start: { dateTime: "2020-09-15T10:00:00-04:00" },
         end: { dateTime: "2020-09-15T10:30:00-04:00" }
       },
       {
         id: "1ghkbvh1jrk7e5qiql3fq0b8pe_20200915T170000Z",
-        summary: "Marie-France <> Équipe Arthur",
+        summary: "23-WE <> asd WER",
         start: { dateTime: "2020-09-15T13:00:00-04:00" },
         end: { dateTime: "2020-09-15T15:00:00-04:00" }
       },
       {
         id: "4rp2ieg5a3psccfk5k5k7m522i_20200917T130000Z",
-        summary: "André <> Gregory - Banque d'heure LaMain",
+        summary: "André <> test-user - Banque d'heure LaMain",
         start: { dateTime: "2020-09-17T09:00:00-04:00" },
         end: { dateTime: "2020-09-17T10:00:00-04:00" }
       },
       {
         id: "7413lef3g1hip8hvk6tbipkqrq_20200917T140000Z",
-        summary: "Arthur ",
+        summary: "WER ",
         start: { dateTime: "2020-09-17T10:00:00-04:00" },
         end: { dateTime: "2020-09-17T11:00:00-04:00" }
       },
       {
         id: "1ghkbvh1jrk7e5qiql3fq0b8pe_20200917T170000Z",
-        summary: "Marie-France <> Équipe Arthur",
+        summary: "23-WE <> asd WER",
         start: { dateTime: "2020-09-17T13:00:00-04:00" },
         end: { dateTime: "2020-09-17T15:00:00-04:00" }
       },
       {
         id: "1s7ig4egg31of9ch8kq75u0ljp",
-        summary: "Validation Bootcamp F20 ",
+        summary: "Validation asd F20 ",
         start: { dateTime: "2020-09-18T13:00:00-04:00" },
         end: { dateTime: "2020-09-18T13:45:00-04:00" }
       }
     ]
   },
   {
-    id: "gregory2@goarthur.ai",
-    summary: "Gregory - AI",
+    id: "test-user2@test-email.ai",
+    summary: "test-user - AI",
     color: "#9403d7",
     dates: [
       {
         id:
           "1g8go31g60o30c1g60o30c1g60o32c1g60o30c1g6p24cdph8gpjch9o8go3ehhk84s42gpj6so34hi56gr4ae1h8h30",
-        summary: "Discussions préliminaires - Brevet & HR",
+        summary: "asd F - ER & HR",
         start: { dateTime: "2020-09-14T10:00:00-04:00" },
         end: { dateTime: "2020-09-14T12:00:00-04:00" }
       },
       {
         id: "21oc0dd63l3ggmscnk78pialdt",
-        summary: "Brahm <> Gregory",
+        summary: "Test <> test-user",
         start: { dateTime: "2020-09-15T07:00:00-04:00" },
         end: { dateTime: "2020-09-15T10:30:00-04:00" }
       },
       {
         id: "rsf2d61pr8hmt0q6tu8ntauqts",
-        summary: "Meeting with Brahm Glickman from the IA Quebec book project",
+        summary: "Hi with Test Glickman from the DEU book project",
         start: { dateTime: "2020-09-15T07:00:00-04:00" },
         end: { dateTime: "2020-09-15T10:30:00-04:00" }
       },
       {
         id: "1ghkbvh1jrk7e5qiql3fq0b8pe_20200915T170000Z",
-        summary: "Marie-France <> Équipe Arthur",
+        summary: "23-WE <> asd WER",
         start: { dateTime: "2020-09-15T10:00:00-04:00" },
         end: { dateTime: "2020-09-15T12:00:00-04:00" }
       },
       {
         id: "4rp2ieg5a3psccfk5k5k7m522i_20200917T130000Z",
-        summary: "André <> Gregory - Banque d'heure LaMain",
+        summary: "André <> test-user - Banque d'heure LaMain",
         start: { dateTime: "2020-09-17T19:00:00-04:00" },
         end: { dateTime: "2020-09-17T22:00:00-04:00" }
       },
       {
         id: "7413lef3g1hip8hvk6tbipkqrq_20200917T140000Z",
-        summary: "Arthur ",
+        summary: "WER ",
         start: { dateTime: "2020-09-17T16:00:00-04:00" },
         end: { dateTime: "2020-09-17T18:00:00-04:00" }
       },
       {
         id: "1ghkbvh1jrk7e5qiql3fq0b8pe_20200917T170000Z",
-        summary: "Marie-France <> Équipe Arthur",
+        summary: "23-WE <> asd WER",
         start: { dateTime: "2020-09-17T10:00:00-04:00" },
         end: { dateTime: "2020-09-17T15:00:00-04:00" }
       },
@@ -318,13 +318,13 @@ export default [
     ]
   },
   {
-    id: "philippe@goarthur.ai",
-    summary: "philippe@goarthur.ai",
+    id: "test-user2e@test-email.ai",
+    summary: "test-user2e@test-email.ai",
     color: "#cd74e6",
     dates: [
       {
         id: "7413lef3g1hip8hvk6tbipkqrq_20200917T140000Z",
-        summary: "Arthur ",
+        summary: "WER ",
         start: { dateTime: "2020-09-17T10:00:00-04:00" },
         end: { dateTime: "2020-09-17T11:00:00-04:00" }
       }
