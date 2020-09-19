@@ -22,12 +22,12 @@ export default {
     precision: { type: Number, default: 30 },
 
     data: Array,
-    selected: Date
+    selected: { type: Date, default: () => new Date() }
   },
 
   mounted() {
-    let now = this.$moment()
-    let minutes = now.minutes() + now.hours() * 60
+    let now = new Date()
+    let minutes = now.getMinutes() + now.getHours() * 60
 
     let scrollPercent = ((minutes - 0) / (60 * 24 - 0)) * (100 - 0) + 0
     this.$refs.cal.scrollTop =
@@ -37,21 +37,30 @@ export default {
 
   computed: {
     days() {
+      function getMonday(d) {
+        d = new Date(d)
+        var day = d.getDay(),
+          diff = d.getDate() - day + (day == 0 ? -6 : 1)
+        return new Date(d.setDate(diff))
+      }
+
+      function addOnDay(date, amount) {
+        const d = date
+        d.setDate(d.getDate() + amount)
+        return d
+      }
+
       let result = []
 
       for (var i = 0; i < 7; i++) {
-        result.push(
-          this.$moment(this.selected)
-            .startOf("isoWeek")
-            .add(i, "days")
-        )
+        result.push(addOnDay(getMonday(new Date()), i))
       }
       return result
     },
     concatenatedData() {
       const roundTime = t => {
-        let m = t.minutes()
-        let h = t.hours()
+        let m = t.getMinutes()
+        let h = t.getHours()
 
         let i = 1
         let ceil = 0
@@ -64,11 +73,18 @@ export default {
         m =
           ((((m + this.precision / 2) / this.precision) | 0) * this.precision) %
           60
-        t.hours(h)
-        t.minutes(m)
-        t.seconds(0)
-        t.milliseconds(0)
+
+        t.setHours(h)
+        t.setMinutes(m)
+        t.setSeconds(0)
+        t.setMilliseconds(0)
         return t
+      }
+
+      function diff_minutes(dt2, dt1) {
+        var diff = (dt2.getTime() - dt1.getTime()) / 1000
+        diff /= 60
+        return Math.abs(Math.round(diff))
       }
 
       let tmp = {
@@ -84,10 +100,10 @@ export default {
       if (this.data)
         this.data.forEach(person =>
           person.dates.forEach(date => {
-            let start = this.$moment(date.start.date || date.start.dateTime)
-            let end = this.$moment(date.end.date || date.end.dateTime)
-            let weekday = this.$moment(start)
-              .format("ddd")
+            let start = new Date(date.start.date || date.start.dateTime)
+            let end = new Date(date.end.date || date.end.dateTime)
+            let weekday = new Date(start)
+              .toLocaleString("default", { weekday: "short" })
               .toLowerCase()
 
             let e = {
@@ -100,14 +116,16 @@ export default {
               grid: {
                 start: roundTime(start),
                 end:
-                  start != end
+                  start.getTime() != end.getTime()
                     ? roundTime(end)
-                    : roundTime(end.add(this.precision, "minutes")),
+                    : roundTime(
+                        end.setMinutes(end.getMinutes(), this.precision)
+                      ),
                 dur:
-                  start != end
-                    ? Math.round(end.diff(start, "minutes") / this.precision)
+                  start.getTime() != end.getTime()
+                    ? Math.round(diff_minutes(end, start) / this.precision)
                     : Math.round(
-                        (end.diff(start, "minutes") + this.precision) /
+                        (diff_minutes(end, start) + this.precision) /
                           this.precision
                       )
               }

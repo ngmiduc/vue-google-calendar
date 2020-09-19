@@ -1,10 +1,6 @@
 <template>
   <div class="page">
-    <calendar
-      :data="calendarData"
-      :selected="new Date()"
-      :precision="60"
-    ></calendar>
+    <calendar :data="calendarData"></calendar>
   </div>
 </template>
 

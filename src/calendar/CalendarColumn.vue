@@ -1,11 +1,10 @@
 <template>
   <div class="cal-column" :class="{ selected: active }">
-    <div
-      class="cal-column-header"
-      :class="{ frst: day.isoWeekday() == 1, lst: day.isoWeekday() == 7 }"
-    >
-      <span class="dayname">{{ day | moment("dddd") }}</span>
-      <span class="daynum">{{ day | moment("D") }}</span>
+    <div class="cal-column-header">
+      <span class="dayname">{{
+        day.toLocaleString("default", { weekday: "long" })
+      }}</span>
+      <span class="daynum">{{ day.getDate() }}</span>
     </div>
 
     <div class="cal-column-body">
@@ -21,7 +20,7 @@
       <div class="cal-column-body-eventgrid">
         <div
           class="index"
-          v-if="$moment().isSame(day, 'day')"
+          v-if="new Date().getDay() === day.getDay()"
           :style="{ top: scrollPercent + '%' }"
         ></div>
 
@@ -45,7 +44,7 @@ export default {
   },
   props: {
     precision: Number,
-    day: Object,
+    day: Date,
     data: Array
   },
   data() {
@@ -57,25 +56,42 @@ export default {
   },
 
   created() {
-    let now = this.$moment()
-    let minutes = now.minutes() + now.hours() * 60
+    let now = new Date()
+    let minutes = now.getMinutes() + now.getHours() * 60
 
     this.scrollPercent = ((minutes - 0) / (60 * 24 - 0)) * (100 - 0) + 0
   },
   computed: {
     positioning() {
+      function diff_minutes(dt2, dt1) {
+        var diff = (dt2.getTime() - dt1.getTime()) / 1000
+        diff /= 60
+        return Math.abs(Math.round(diff))
+      }
+
+      function isBefore(d1, d2) {
+        return d1.getTime() < d2.getTime()
+      }
+      function isAfter(d1, d2) {
+        return d1.getTime() > d2.getTime()
+      }
+
+      function isSame(d1, d2) {
+        return d1.getTime() === d2.getTime()
+      }
+
       if (!this.data) return []
       return [...this.data]
         .sort((a, b) =>
-          a.grid.start.isSame(b.grid.start)
+          isSame(a.grid.start, b.grid.start)
             ? b.grid.dur - a.grid.dur
-            : a.grid.start.diff(b.grid.start)
+            : diff_minutes(a.grid.start, b.grid.start)
         )
         .map(item => {
           let block = this.data.filter(
             i =>
-              i.grid.start.isBefore(item.grid.start) &&
-              i.grid.end.isAfter(item.grid.start)
+              isBefore(i.grid.start, item.grid.start) &&
+              isAfter(i.grid.end, item.grid.start)
           )
           if (block.length == 0) {
             item.grid["indent"] = 0
@@ -90,7 +106,9 @@ export default {
             item.grid["indent"] = maxindent
           }
 
-          let same = this.data.filter(i => i.grid.start.isSame(item.grid.start))
+          let same = this.data.filter(i =>
+            isSame(i.grid.start, item.grid.start)
+          )
 
           if (same.length <= 1) {
             item.grid["index"] = null
