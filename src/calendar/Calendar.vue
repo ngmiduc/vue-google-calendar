@@ -140,6 +140,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
+
 .cal-wrapper {
   height: 100%;
   position: relative;
@@ -147,6 +149,12 @@ export default {
   box-shadow: 0 0 25px 5px rgba(135, 137, 182, 0.2);
   border-radius: 10px;
   overflow: hidden;
+
+  * {
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: lighter;
+    color: rgb(96, 96, 96);
+  }
 
   .cal {
     overflow-y: scroll;
