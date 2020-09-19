@@ -28,9 +28,6 @@
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.2.3",
     "node-sass": "^4.14.1",
-    "rollup-plugin-buble": "^0.19.8",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-vue": "^5.1.9",
     "sass-loader": "^7.3.1",
     "vue-loader": "^15.9.3",
     "vue-template-compiler": "^2.6.12"
