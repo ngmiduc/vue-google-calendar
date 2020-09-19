@@ -2,11 +2,22 @@
 
 VueJs Week Calendar based on Google Calendar API.
 
-## component
+## install component (WIP)
 
-The component can be found in /src/calendar
+`npm i vue-google-calendar`
 
-import the `Calendar.vue` and you are good to go.
+`import VueGoogleCalendar from "vue-google-calendar/src/calendar/Calendar"`
+
+and use it in your component file
+
+```
+
+<template>
+  <vue-google-calendar :data="calendarData"/>
+</template>
+
+components: {VueGoogleCalendar}
+```
 
 ## props
 
