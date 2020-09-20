@@ -2,7 +2,7 @@
 
 VueJs Week Calendar based on Google Calendar API.
 
-## install component (WIP)
+## install component
 
 `npm i vue-google-calendar`
 
