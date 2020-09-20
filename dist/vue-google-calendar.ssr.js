@@ -297,7 +297,7 @@ var __vue_render__ = function __vue_render__() {
       selected: _vm.opened
     },
     style: _vm.getPos(_vm.data.grid)
-  }, [_vm._ssrNode("<div class=\"cal-event-content\"" + _vm._ssrStyle(null, _vm.getColor, null) + " data-v-62af73ee>" + _vm._ssrEscape("\n    " + _vm._s(_vm.data.e.summary) + "\n  ") + "</div>")]);
+  }, [_vm._ssrNode("<div class=\"cal-event-content\"" + _vm._ssrStyle(null, _vm.getColor, null) + " data-v-0ad3d1d5>" + _vm._ssrEscape("\n    " + _vm._s(_vm.data.e.summary) + "\n  ") + "</div>")]);
 };
 
 var __vue_staticRenderFns__ = [];
@@ -305,8 +305,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-62af73ee_0", {
-    source: ".cal-event[data-v-62af73ee]{z-index:2;position:relative;opacity:.95;border-radius:4px;overflow:hidden;border:1px solid #dedede;transition:all 50ms}.cal-event[data-v-62af73ee]:hover{transition:all 250ms;opacity:1;cursor:pointer;transform:scale(1.025)}.cal-event.selected[data-v-62af73ee]{transition:all 250ms;z-index:100;min-height:40px;box-shadow:5px 5px 20px 0 rgba(109,126,135,.56)}.cal-event .cal-event-content[data-v-62af73ee]{width:100%;height:100%;padding:4px;box-sizing:border-box;display:flex;align-items:flex-start;justify-content:flex-start;font-size:1.5vmin;color:#454545}",
+  inject("data-v-0ad3d1d5_0", {
+    source: ".cal-event[data-v-0ad3d1d5]{z-index:2;position:relative;opacity:.95;border-radius:4px;overflow:hidden;border:1px solid #dedede;transition:all 50ms}.cal-event[data-v-0ad3d1d5]:hover{transition:all 250ms;opacity:1;cursor:pointer;transform:scale(1.025)}.cal-event.selected[data-v-0ad3d1d5]{transition:all 250ms;z-index:100;min-height:40px;box-shadow:5px 5px 20px 0 rgba(109,126,135,.56)}.cal-event .cal-event-content[data-v-0ad3d1d5]{width:100%;height:100%;padding:4px;box-sizing:border-box;display:flex;align-items:flex-start;justify-content:flex-start;font-size:1.5vmin;color:#454545}",
     map: undefined,
     media: undefined
   });
@@ -314,10 +314,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-62af73ee";
+var __vue_scope_id__ = "data-v-0ad3d1d5";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-62af73ee";
+var __vue_module_identifier__ = "data-v-0ad3d1d5";
 /* functional template */
 
 var __vue_is_functional_template__ = false;
@@ -408,13 +408,13 @@ var __vue_render__$1 = function __vue_render__() {
     class: {
       selected: _vm.active
     }
-  }, [_vm._ssrNode("<div class=\"cal-column-header\" data-v-df196926><span class=\"dayname\" data-v-df196926>" + _vm._ssrEscape(_vm._s(_vm.day.toLocaleString("default", {
+  }, [_vm._ssrNode("<div class=\"cal-column-header\" data-v-17672579><span class=\"dayname\" data-v-17672579>" + _vm._ssrEscape(_vm._s(_vm.day.toLocaleString("default", {
     weekday: "long"
-  }))) + "</span> <span class=\"daynum\" data-v-df196926>" + _vm._ssrEscape(_vm._s(_vm.day.getDate())) + "</span></div> "), _vm._ssrNode("<div class=\"cal-column-body\" data-v-df196926>", "</div>", [_vm._ssrNode("<div class=\"cal-column-body-slotgrid\" data-v-df196926>" + _vm._ssrList(24, function (n) {
-    return "<div class=\"cal-column-body-slotgrid--lines\" data-v-df196926>" + _vm._ssrEscape("\n        " + _vm._s(n) + ":00\n      ") + "</div>";
-  }) + "</div> "), _vm._ssrNode("<div class=\"cal-column-body-eventgrid\" data-v-df196926>", "</div>", [_vm._ssrNode((new Date().getDay() === _vm.day.getDay() ? "<div class=\"index\"" + _vm._ssrStyle(null, {
+  }))) + "</span> <span class=\"daynum\" data-v-17672579>" + _vm._ssrEscape(_vm._s(_vm.day.getDate())) + "</span></div> "), _vm._ssrNode("<div class=\"cal-column-body\" data-v-17672579>", "</div>", [_vm._ssrNode("<div class=\"cal-column-body-slotgrid\" data-v-17672579>" + _vm._ssrList(24, function (n) {
+    return "<div class=\"cal-column-body-slotgrid--lines\" data-v-17672579>" + _vm._ssrEscape("\n        " + _vm._s(n) + ":00\n      ") + "</div>";
+  }) + "</div> "), _vm._ssrNode("<div class=\"cal-column-body-eventgrid\" data-v-17672579>", "</div>", [_vm._ssrNode((new Date().getDay() === _vm.day.getDay() ? "<div class=\"index\"" + _vm._ssrStyle(null, {
     top: _vm.scrollPercent + '%'
-  }, null) + " data-v-df196926></div>" : "<!---->") + " "), _vm._l(_vm.positioning, function (e, index) {
+  }, null) + " data-v-17672579></div>" : "<!---->") + " "), _vm._l(_vm.positioning, function (e, index) {
     return _c('calendar-event', {
       key: index,
       attrs: {
@@ -429,8 +429,8 @@ var __vue_staticRenderFns__$1 = [];
 
 var __vue_inject_styles__$1 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-df196926_0", {
-    source: ".cal-column[data-v-df196926]{height:inherit;z-index:3}.cal-column.border-left[data-v-df196926]{border-left:1px solid rgba(0,0,0,.1)}.cal-column .cal-column-header[data-v-df196926]{border-bottom:1px solid rgba(0,0,0,.1);padding:10px;background-color:#f0f0f0;color:#000;display:flex;align-items:center;justify-content:space-between;position:sticky;position:-webkit-sticky;top:0;z-index:200}.cal-column .cal-column-header .dayname[data-v-df196926]{font-size:16px;text-transform:uppercase}.cal-column .cal-column-header .daynum[data-v-df196926]{font-size:20px}.cal-column .cal-column-body[data-v-df196926]{position:relative;height:100%}.cal-column .cal-column-body .cal-column-body-editgrid[data-v-df196926],.cal-column .cal-column-body .cal-column-body-eventgrid[data-v-df196926],.cal-column .cal-column-body .cal-column-body-slotgrid[data-v-df196926]{position:absolute;top:0;left:0;right:0;bottom:0;height:100%}.cal-column .cal-column-body .cal-column-body-eventgrid[data-v-df196926]{right:15px}.cal-column .cal-column-body .cal-column-body-eventgrid .index[data-v-df196926]{position:absolute;background-color:rgba(255,0,0,.5);left:0;right:-5px;height:10px;z-index:10;border-radius:2px}.cal-column .cal-column-body .cal-column-body-slotgrid[data-v-df196926]{display:grid;grid-template-rows:repeat(24,1fr);z-index:1}.cal-column .cal-column-body .cal-column-body-slotgrid .cal-column-body-slotgrid--lines[data-v-df196926]{color:rgba(200,200,200,.9);padding:0 2px;text-align:right;font-size:14px;display:flex;flex-direction:column;justify-content:flex-end;user-select:none}.cal-column .cal-column-body .cal-column-body-slotgrid .cal-column-body-slotgrid--lines[data-v-df196926]:not(:first-child){border-top:1px solid rgba(170,170,170,.2)}",
+  inject("data-v-17672579_0", {
+    source: ".cal-column[data-v-17672579]{height:inherit;z-index:3}.cal-column.border-left[data-v-17672579]{border-left:1px solid rgba(0,0,0,.1)}.cal-column .cal-column-header[data-v-17672579]{border-bottom:1px solid rgba(0,0,0,.1);padding:10px;background-color:#f0f0f0;color:#000;display:flex;align-items:center;justify-content:space-between;position:sticky;position:-webkit-sticky;top:0;z-index:200}.cal-column .cal-column-header .dayname[data-v-17672579]{font-size:16px;text-transform:uppercase}.cal-column .cal-column-header .daynum[data-v-17672579]{font-size:20px}.cal-column .cal-column-body[data-v-17672579]{position:relative;height:100%}.cal-column .cal-column-body .cal-column-body-editgrid[data-v-17672579],.cal-column .cal-column-body .cal-column-body-eventgrid[data-v-17672579],.cal-column .cal-column-body .cal-column-body-slotgrid[data-v-17672579]{position:absolute;top:0;left:0;right:0;bottom:0;height:100%}.cal-column .cal-column-body .cal-column-body-eventgrid[data-v-17672579]{right:15px}.cal-column .cal-column-body .cal-column-body-eventgrid .index[data-v-17672579]{position:absolute;background-color:rgba(255,0,0,.5);left:0;right:-5px;height:10px;z-index:10;border-radius:2px}.cal-column .cal-column-body .cal-column-body-slotgrid[data-v-17672579]{display:grid;grid-template-rows:repeat(24,1fr);z-index:1}.cal-column .cal-column-body .cal-column-body-slotgrid .cal-column-body-slotgrid--lines[data-v-17672579]{color:rgba(200,200,200,.9);padding:0 2px;text-align:right;font-size:14px;display:flex;flex-direction:column;justify-content:flex-end;user-select:none}.cal-column .cal-column-body .cal-column-body-slotgrid .cal-column-body-slotgrid--lines[data-v-17672579]:not(:first-child){border-top:1px solid rgba(170,170,170,.2)}",
     map: undefined,
     media: undefined
   });
@@ -438,10 +438,10 @@ var __vue_inject_styles__$1 = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$1 = "data-v-df196926";
+var __vue_scope_id__$1 = "data-v-17672579";
 /* module identifier */
 
-var __vue_module_identifier__$1 = "data-v-df196926";
+var __vue_module_identifier__$1 = "data-v-17672579";
 /* functional template */
 
 var __vue_is_functional_template__$1 = false;
@@ -572,7 +572,7 @@ var __vue_render__$2 = function __vue_render__() {
 
   return _c('div', {
     staticClass: "cal-wrapper"
-  }, [_vm._ssrNode("<div class=\"cal\" data-v-3a6b9c8a>", "</div>", _vm._l(_vm.concatenatedData, function (value, name, index) {
+  }, [_vm._ssrNode("<div class=\"cal\" data-v-42a98087>", "</div>", _vm._l(_vm.concatenatedData, function (value, name, index) {
     return _c('calendar-column', {
       key: name,
       attrs: {
@@ -589,8 +589,8 @@ var __vue_staticRenderFns__$2 = [];
 
 var __vue_inject_styles__$2 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-3a6b9c8a_0", {
-    source: ".cal-wrapper[data-v-3a6b9c8a]{height:100%;width:100%;position:relative;border:.1px solid rgba(164,164,164,.25);box-shadow:0 0 25px 5px rgba(135,137,182,.2);border-radius:10px;overflow:hidden}.cal-wrapper *[data-v-3a6b9c8a]{font-weight:lighter;color:#606060}.cal-wrapper .cal[data-v-3a6b9c8a]{overflow-y:scroll;background-color:#fff;height:100%;user-select:none;display:grid;grid-template-columns:repeat(7,1fr);grid-template-rows:300%}",
+  inject("data-v-42a98087_0", {
+    source: ".cal-wrapper[data-v-42a98087]{height:100%;width:100%;position:relative;border:.1px solid rgba(164,164,164,.25);box-shadow:0 0 25px 5px rgba(135,137,182,.2);border-radius:10px;overflow:hidden}.cal-wrapper *[data-v-42a98087]{font-weight:lighter;color:#606060}.cal-wrapper .cal[data-v-42a98087]{overflow-y:scroll;background-color:#fff;height:100%;user-select:none;display:grid;grid-template-columns:repeat(7,1fr);grid-template-rows:300%}",
     map: undefined,
     media: undefined
   });
@@ -598,10 +598,10 @@ var __vue_inject_styles__$2 = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$2 = "data-v-3a6b9c8a";
+var __vue_scope_id__$2 = "data-v-42a98087";
 /* module identifier */
 
-var __vue_module_identifier__$2 = "data-v-3a6b9c8a";
+var __vue_module_identifier__$2 = "data-v-42a98087";
 /* functional template */
 
 var __vue_is_functional_template__$2 = false;
