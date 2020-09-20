@@ -1,50 +1,77 @@
-const diffMinutes = (dt2, dt1) => {
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+}
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+}
+
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+  return arr2;
+}
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}var diffMinutes = function diffMinutes(dt2, dt1) {
   var diff = (dt2.getTime() - dt1.getTime()) / 1000;
   diff /= 60;
   return Math.abs(Math.round(diff));
 };
-const isBefore = (d1, d2) => {
+var isBefore = function isBefore(d1, d2) {
   return d1.getTime() < d2.getTime();
 };
-const isAfter = (d1, d2) => {
+var isAfter = function isAfter(d1, d2) {
   return d1.getTime() > d2.getTime();
 };
-const isSame = (d1, d2) => {
+var isSame = function isSame(d1, d2) {
   return d1.getTime() === d2.getTime();
 };
-const getMonday = d => {
+var getMonday = function getMonday(d) {
   d = new Date(d);
   var day = d.getDay(),
       diff = d.getDate() - day + (day == 0 ? -6 : 1);
   return new Date(d.setDate(diff));
 };
-const addDays = (date, amount) => {
-  const d = date;
+var addDays = function addDays(date, amount) {
+  var d = date;
   d.setDate(d.getDate() + amount);
   return d;
-};
-
-//
+};//
 var script = {
   name: "calendareventv2",
   props: {
     data: Object
   },
-
-  data() {
+  data: function data() {
     return {
       opened: false
     };
   },
-
   computed: {
-    getColor() {
-      const getContrastColor = color => {
+    getColor: function getColor() {
+      var getContrastColor = function getContrastColor(color) {
         // Counting the perceptive luminance - human eye favors green color...
-        const R = parseInt(color[1] + color[2], 16);
-        const G = parseInt(color[3] + color[4], 16);
-        const B = parseInt(color[5] + color[6], 16);
-        const luminance = (0.299 * R + 0.587 * G + 0.114 * B) / 255;
+        var R = parseInt(color[1] + color[2], 16);
+        var G = parseInt(color[3] + color[4], 16);
+        var B = parseInt(color[5] + color[6], 16);
+        var luminance = (0.299 * R + 0.587 * G + 0.114 * B) / 255;
         return luminance > 0.5 ? "#454545" : "#FFFFFF";
       };
 
@@ -57,45 +84,40 @@ var script = {
         color: getContrastColor(this.data.owner.color)
       };
     }
-
   },
   methods: {
-    multicolor(c) {
-      let string = "repeating-linear-gradient(45deg";
-      let stripe = 50 / c.length;
+    multicolor: function multicolor(c) {
+      var string = "repeating-linear-gradient(45deg";
+      var stripe = 50 / c.length;
 
       for (var i = 0; i < c.length; i++) {
-        string += `,${c[i]} ${stripe * i}%, ${c[i]} ${stripe * (i + 1)}%`;
+        string += ",".concat(c[i], " ").concat(stripe * i, "%, ").concat(c[i], " ").concat(stripe * (i + 1), "%");
       }
 
       string += ")";
       return string;
     },
-
-    timeToPercent(t) {
+    timeToPercent: function timeToPercent(t) {
       //set top position of event block
-      let percent = (t - 0) / (60 * 24 - 0);
-      let outputX = percent * (100 - 0) + 0;
+      var percent = (t - 0) / (60 * 24 - 0);
+      var outputX = percent * (100 - 0) + 0;
       return outputX + "%";
     },
-
-    durationToPercent(l) {
+    durationToPercent: function durationToPercent(l) {
       //set height of event block
-      let percent = (l - 0) / (60 * 24 - 0);
-      let outputX = percent * (100 - 0) + 0;
+      var percent = (l - 0) / (60 * 24 - 0);
+      var outputX = percent * (100 - 0) + 0;
       return outputX + "%";
     },
-
-    getPos({
-      start,
-      end,
-      indent,
-      index,
-      indexOf
-    }) {
+    getPos: function getPos(_ref) {
+      var start = _ref.start,
+          end = _ref.end,
+          indent = _ref.indent,
+          index = _ref.index,
+          indexOf = _ref.indexOf;
       //set events into position with indent index absolute position
-      let offset = start.getMinutes() + start.getHours() * 60;
-      let duration = diffMinutes(start, end);
+      var offset = start.getMinutes() + start.getHours() * 60;
+      var duration = diffMinutes(start, end);
 
       if (this.opened) {
         return {
@@ -107,10 +129,10 @@ var script = {
         };
       }
 
-      let width = 90;
+      var width = 90;
       if (index !== null) width = width / indexOf;
-      let indentSize = 5;
-      let left = indent * indentSize;
+      var indentSize = 5;
+      var left = indent * indentSize;
 
       if (index !== null) {
         left = left + width * (index - 1);
@@ -123,7 +145,7 @@ var script = {
         left = indent * (indentSize + 1) + width * (index - 1);
       }
 
-      let indentreset = 4;
+      var indentreset = 4;
 
       if (indent > indentreset && index == null) {
         left = indentSize * (indent % indentreset);
@@ -144,11 +166,8 @@ var script = {
         height: this.durationToPercent(duration)
       };
     }
-
   }
-};
-
-function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
+};function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
     if (typeof shadowMode !== 'boolean') {
         createInjectorSSR = createInjector;
         createInjector = shadowMode;
@@ -221,66 +240,51 @@ function normalizeComponent(template, style, script, scopeId, isFunctionalTempla
         }
     }
     return script;
+}function createInjectorSSR(context) {
+    if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__;
+    }
+    if (!context)
+        return () => { };
+    if (!('styles' in context)) {
+        context._styles = context._styles || {};
+        Object.defineProperty(context, 'styles', {
+            enumerable: true,
+            get: () => context._renderStyles(context._styles)
+        });
+        context._renderStyles = context._renderStyles || renderStyles;
+    }
+    return (id, style) => addStyle(id, style, context);
 }
-
-const isOldIE = typeof navigator !== 'undefined' &&
-    /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
-function createInjector(context) {
-    return (id, style) => addStyle(id, style);
-}
-let HEAD;
-const styles = {};
-function addStyle(id, css) {
-    const group = isOldIE ? css.media || 'default' : id;
-    const style = styles[group] || (styles[group] = { ids: new Set(), styles: [] });
-    if (!style.ids.has(id)) {
-        style.ids.add(id);
+function addStyle(id, css, context) {
+    const group =  css.media || 'default' ;
+    const style = context._styles[group] || (context._styles[group] = { ids: [], css: '' });
+    if (!style.ids.includes(id)) {
+        style.media = css.media;
+        style.ids.push(id);
         let code = css.source;
-        if (css.map) {
-            // https://developer.chrome.com/devtools/docs/javascript-debugging
-            // this makes source maps inside style tags work properly in Chrome
-            code += '\n/*# sourceURL=' + css.map.sources[0] + ' */';
-            // http://stackoverflow.com/a/26603875
-            code +=
-                '\n/*# sourceMappingURL=data:application/json;base64,' +
-                    btoa(unescape(encodeURIComponent(JSON.stringify(css.map)))) +
-                    ' */';
-        }
-        if (!style.element) {
-            style.element = document.createElement('style');
-            style.element.type = 'text/css';
-            if (css.media)
-                style.element.setAttribute('media', css.media);
-            if (HEAD === undefined) {
-                HEAD = document.head || document.getElementsByTagName('head')[0];
-            }
-            HEAD.appendChild(style.element);
-        }
-        if ('styleSheet' in style.element) {
-            style.styles.push(code);
-            style.element.styleSheet.cssText = style.styles
-                .filter(Boolean)
-                .join('\n');
-        }
-        else {
-            const index = style.ids.size - 1;
-            const textNode = document.createTextNode(code);
-            const nodes = style.element.childNodes;
-            if (nodes[index])
-                style.element.removeChild(nodes[index]);
-            if (nodes.length)
-                style.element.insertBefore(textNode, nodes[index]);
-            else
-                style.element.appendChild(textNode);
-        }
+        style.css += code + '\n';
     }
 }
-
-/* script */
-const __vue_script__ = script;
+function renderStyles(styles) {
+    let css = '';
+    for (const key in styles) {
+        const style = styles[key];
+        css +=
+            '<style data-vue-ssr-id="' +
+                Array.from(style.ids).join(' ') +
+                '"' +
+                (style.media ? ' media="' + style.media + '"' : '') +
+                '>' +
+                style.css +
+                '</style>';
+    }
+    return css;
+}/* script */
+var __vue_script__ = script;
 /* template */
 
-var __vue_render__ = function () {
+var __vue_render__ = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -293,21 +297,13 @@ var __vue_render__ = function () {
       selected: _vm.opened
     },
     style: _vm.getPos(_vm.data.grid)
-  }, [_c('div', {
-    staticClass: "cal-event-content",
-    style: _vm.getColor,
-    on: {
-      "click": function ($event) {
-        _vm.opened = !_vm.opened;
-      }
-    }
-  }, [_vm._v("\n    " + _vm._s(_vm.data.e.summary) + "\n  ")])]);
+  }, [_vm._ssrNode("<div class=\"cal-event-content\"" + _vm._ssrStyle(null, _vm.getColor, null) + " data-v-62af73ee>" + _vm._ssrEscape("\n    " + _vm._s(_vm.data.e.summary) + "\n  ") + "</div>")]);
 };
 
 var __vue_staticRenderFns__ = [];
 /* style */
 
-const __vue_inject_styles__ = function (inject) {
+var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-62af73ee_0", {
     source: ".cal-event[data-v-62af73ee]{z-index:2;position:relative;opacity:.95;border-radius:4px;overflow:hidden;border:1px solid #dedede;transition:all 50ms}.cal-event[data-v-62af73ee]:hover{transition:all 250ms;opacity:1;cursor:pointer;transform:scale(1.025)}.cal-event.selected[data-v-62af73ee]{transition:all 250ms;z-index:100;min-height:40px;box-shadow:5px 5px 20px 0 rgba(109,126,135,.56)}.cal-event .cal-event-content[data-v-62af73ee]{width:100%;height:100%;padding:4px;box-sizing:border-box;display:flex;align-items:flex-start;justify-content:flex-start;font-size:1.5vmin;color:#454545}",
@@ -318,24 +314,19 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-62af73ee";
+var __vue_scope_id__ = "data-v-62af73ee";
 /* module identifier */
 
-const __vue_module_identifier__ = undefined;
+var __vue_module_identifier__ = "data-v-62af73ee";
 /* functional template */
 
-const __vue_is_functional_template__ = false;
-/* style inject SSR */
-
+var __vue_is_functional_template__ = false;
 /* style inject shadow dom */
 
-const __vue_component__ = /*#__PURE__*/normalizeComponent({
+var __vue_component__ = /*#__PURE__*/normalizeComponent({
   render: __vue_render__,
   staticRenderFns: __vue_staticRenderFns__
-}, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, false, createInjector, undefined, undefined);
-
-//
-var script$1 = {
+}, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, false, undefined, createInjectorSSR, undefined);var script$1 = {
   name: "calendarcolumn",
   components: {
     CalendarEvent: __vue_component__
@@ -345,45 +336,50 @@ var script$1 = {
     day: Date,
     data: Array
   },
-
-  data() {
+  data: function data() {
     return {
       scrollPercent: 0,
       editing: false,
       active: false
     };
   },
-
-  created() {
-    let now = new Date();
-    let minutes = now.getMinutes() + now.getHours() * 60;
+  created: function created() {
+    var now = new Date();
+    var minutes = now.getMinutes() + now.getHours() * 60;
     this.scrollPercent = (minutes - 0) / (60 * 24 - 0) * (100 - 0) + 0;
   },
-
   computed: {
-    positioning() {
+    positioning: function positioning() {
+      var _this = this;
+
       if (!this.data) return [];
-      return [...this.data].sort((a, b) => isSame(a.grid.start, b.grid.start) ? b.grid.dur - a.grid.dur : diffMinutes(a.grid.start, b.grid.start)).map(item => {
-        let block = this.data.filter(i => isBefore(i.grid.start, item.grid.start) && isAfter(i.grid.end, item.grid.start));
+      return _toConsumableArray(this.data).sort(function (a, b) {
+        return isSame(a.grid.start, b.grid.start) ? b.grid.dur - a.grid.dur : diffMinutes(a.grid.start, b.grid.start);
+      }).map(function (item) {
+        var block = _this.data.filter(function (i) {
+          return isBefore(i.grid.start, item.grid.start) && isAfter(i.grid.end, item.grid.start);
+        });
 
         if (block.length == 0) {
           item.grid["indent"] = 0;
         } else {
-          let maxindent = 1;
-          block.forEach(i => {
+          var maxindent = 1;
+          block.forEach(function (i) {
             if (i.grid.indent) if (i.grid.indent >= maxindent) maxindent = i.grid.indent + 1;
           });
           item.grid["indent"] = maxindent;
         }
 
-        let same = this.data.filter(i => isSame(i.grid.start, item.grid.start));
+        var same = _this.data.filter(function (i) {
+          return isSame(i.grid.start, item.grid.start);
+        });
 
         if (same.length <= 1) {
           item.grid["index"] = null;
           item.grid["indexOf"] = null;
         } else {
-          let index = 1;
-          same.forEach(i => {
+          var index = 1;
+          same.forEach(function (i) {
             if (i.grid.index) {
               if (i.grid.index == index) index++;
             }
@@ -395,15 +391,12 @@ var script$1 = {
         return item;
       });
     }
-
   }
-};
-
-/* script */
-const __vue_script__$1 = script$1;
+};/* script */
+var __vue_script__$1 = script$1;
 /* template */
 
-var __vue_render__$1 = function () {
+var __vue_render__$1 = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -415,44 +408,26 @@ var __vue_render__$1 = function () {
     class: {
       selected: _vm.active
     }
-  }, [_c('div', {
-    staticClass: "cal-column-header"
-  }, [_c('span', {
-    staticClass: "dayname"
-  }, [_vm._v(_vm._s(_vm.day.toLocaleString("default", {
+  }, [_vm._ssrNode("<div class=\"cal-column-header\" data-v-df196926><span class=\"dayname\" data-v-df196926>" + _vm._ssrEscape(_vm._s(_vm.day.toLocaleString("default", {
     weekday: "long"
-  })))]), _vm._v(" "), _c('span', {
-    staticClass: "daynum"
-  }, [_vm._v(_vm._s(_vm.day.getDate()))])]), _vm._v(" "), _c('div', {
-    staticClass: "cal-column-body"
-  }, [_c('div', {
-    staticClass: "cal-column-body-slotgrid"
-  }, _vm._l(24, function (n) {
-    return _c('div', {
-      key: "" + n,
-      staticClass: "cal-column-body-slotgrid--lines"
-    }, [_vm._v("\n        " + _vm._s(n) + ":00\n      ")]);
-  }), 0), _vm._v(" "), _c('div', {
-    staticClass: "cal-column-body-eventgrid"
-  }, [new Date().getDay() === _vm.day.getDay() ? _c('div', {
-    staticClass: "index",
-    style: {
-      top: _vm.scrollPercent + '%'
-    }
-  }) : _vm._e(), _vm._v(" "), _vm._l(_vm.positioning, function (e, index) {
+  }))) + "</span> <span class=\"daynum\" data-v-df196926>" + _vm._ssrEscape(_vm._s(_vm.day.getDate())) + "</span></div> "), _vm._ssrNode("<div class=\"cal-column-body\" data-v-df196926>", "</div>", [_vm._ssrNode("<div class=\"cal-column-body-slotgrid\" data-v-df196926>" + _vm._ssrList(24, function (n) {
+    return "<div class=\"cal-column-body-slotgrid--lines\" data-v-df196926>" + _vm._ssrEscape("\n        " + _vm._s(n) + ":00\n      ") + "</div>";
+  }) + "</div> "), _vm._ssrNode("<div class=\"cal-column-body-eventgrid\" data-v-df196926>", "</div>", [_vm._ssrNode((new Date().getDay() === _vm.day.getDay() ? "<div class=\"index\"" + _vm._ssrStyle(null, {
+    top: _vm.scrollPercent + '%'
+  }, null) + " data-v-df196926></div>" : "<!---->") + " "), _vm._l(_vm.positioning, function (e, index) {
     return _c('calendar-event', {
       key: index,
       attrs: {
         "data": e
       }
     });
-  })], 2)])]);
+  })], 2)], 2)], 2);
 };
 
 var __vue_staticRenderFns__$1 = [];
 /* style */
 
-const __vue_inject_styles__$1 = function (inject) {
+var __vue_inject_styles__$1 = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-df196926_0", {
     source: ".cal-column[data-v-df196926]{height:inherit;z-index:3}.cal-column.border-left[data-v-df196926]{border-left:1px solid rgba(0,0,0,.1)}.cal-column .cal-column-header[data-v-df196926]{border-bottom:1px solid rgba(0,0,0,.1);padding:10px;background-color:#f0f0f0;color:#000;display:flex;align-items:center;justify-content:space-between;position:sticky;position:-webkit-sticky;top:0;z-index:200}.cal-column .cal-column-header .dayname[data-v-df196926]{font-size:16px;text-transform:uppercase}.cal-column .cal-column-header .daynum[data-v-df196926]{font-size:20px}.cal-column .cal-column-body[data-v-df196926]{position:relative;height:100%}.cal-column .cal-column-body .cal-column-body-editgrid[data-v-df196926],.cal-column .cal-column-body .cal-column-body-eventgrid[data-v-df196926],.cal-column .cal-column-body .cal-column-body-slotgrid[data-v-df196926]{position:absolute;top:0;left:0;right:0;bottom:0;height:100%}.cal-column .cal-column-body .cal-column-body-eventgrid[data-v-df196926]{right:15px}.cal-column .cal-column-body .cal-column-body-eventgrid .index[data-v-df196926]{position:absolute;background-color:rgba(255,0,0,.5);left:0;right:-5px;height:10px;z-index:10;border-radius:2px}.cal-column .cal-column-body .cal-column-body-slotgrid[data-v-df196926]{display:grid;grid-template-rows:repeat(24,1fr);z-index:1}.cal-column .cal-column-body .cal-column-body-slotgrid .cal-column-body-slotgrid--lines[data-v-df196926]{color:rgba(200,200,200,.9);padding:0 2px;text-align:right;font-size:14px;display:flex;flex-direction:column;justify-content:flex-end;user-select:none}.cal-column .cal-column-body .cal-column-body-slotgrid .cal-column-body-slotgrid--lines[data-v-df196926]:not(:first-child){border-top:1px solid rgba(170,170,170,.2)}",
@@ -463,23 +438,19 @@ const __vue_inject_styles__$1 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$1 = "data-v-df196926";
+var __vue_scope_id__$1 = "data-v-df196926";
 /* module identifier */
 
-const __vue_module_identifier__$1 = undefined;
+var __vue_module_identifier__$1 = "data-v-df196926";
 /* functional template */
 
-const __vue_is_functional_template__$1 = false;
-/* style inject SSR */
-
+var __vue_is_functional_template__$1 = false;
 /* style inject shadow dom */
 
-const __vue_component__$1 = /*#__PURE__*/normalizeComponent({
+var __vue_component__$1 = /*#__PURE__*/normalizeComponent({
   render: __vue_render__$1,
   staticRenderFns: __vue_staticRenderFns__$1
-}, __vue_inject_styles__$1, __vue_script__$1, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, createInjector, undefined, undefined);
-
-//
+}, __vue_inject_styles__$1, __vue_script__$1, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, undefined, createInjectorSSR, undefined);//
 var script$2 = {
   name: "vue-google-calendar",
   components: {
@@ -493,20 +464,20 @@ var script$2 = {
     data: Array,
     selected: {
       type: Date,
-      default: () => new Date()
+      default: function _default() {
+        return new Date();
+      }
     }
   },
-
-  mounted() {
-    let now = new Date();
-    let minutes = now.getMinutes() + now.getHours() * 60;
-    let scrollPercent = (minutes - 0) / (60 * 24 - 0) * (100 - 0) + 0;
+  mounted: function mounted() {
+    var now = new Date();
+    var minutes = now.getMinutes() + now.getHours() * 60;
+    var scrollPercent = (minutes - 0) / (60 * 24 - 0) * (100 - 0) + 0;
     this.$refs.cal.scrollTop = scrollPercent / 100 * this.$refs.cal.scrollHeight - this.$refs.cal.clientHeight / 2;
   },
-
   computed: {
-    days() {
-      let result = [];
+    days: function days() {
+      var result = [];
 
       for (var i = 0; i < 7; i++) {
         result.push(addDays(getMonday(new Date()), i));
@@ -514,21 +485,22 @@ var script$2 = {
 
       return result;
     },
+    concatenatedData: function concatenatedData() {
+      var _this = this;
 
-    concatenatedData() {
-      const roundTime = t => {
-        let m = t.getMinutes();
-        let h = t.getHours();
-        let i = 1;
-        let ceil = 0;
+      var roundTime = function roundTime(t) {
+        var m = t.getMinutes();
+        var h = t.getHours();
+        var i = 1;
+        var ceil = 0;
 
-        while (this.precision * i < 60) {
-          ceil = this.precision * i;
+        while (_this.precision * i < 60) {
+          ceil = _this.precision * i;
           i++;
         }
 
         if (m > ceil) h++;
-        m = ((m + this.precision / 2) / this.precision | 0) * this.precision % 60;
+        m = ((m + _this.precision / 2) / _this.precision | 0) * _this.precision % 60;
         t.setHours(h);
         t.setMinutes(m);
         t.setSeconds(0);
@@ -536,7 +508,7 @@ var script$2 = {
         return t;
       };
 
-      let tmp = {
+      var tmp = {
         mon: [],
         tue: [],
         wed: [],
@@ -545,50 +517,53 @@ var script$2 = {
         sat: [],
         sun: []
       };
-      if (this.data) this.data.forEach(person => person.dates.forEach(date => {
-        let start = new Date(date.start.date || date.start.dateTime);
-        let end = new Date(date.end.date || date.end.dateTime);
-        let weekday = new Date(start).toLocaleString("default", {
-          weekday: "short"
-        }).toLowerCase();
-        let e = {
-          id: date.id,
-          color: person.color,
-          owner: person,
-          e: date,
-          grid: {
-            start: roundTime(start),
-            end: start.getTime() != end.getTime() ? roundTime(end) : roundTime(end.setMinutes(end.getMinutes(), this.precision)),
-            dur: start.getTime() != end.getTime() ? Math.round(diffMinutes(end, start) / this.precision) : Math.round((diffMinutes(end, start) + this.precision) / this.precision)
-          }
-        };
-        let multievent = [];
-        if (date.attendees) this.data.forEach(p => p.dates.forEach(i => {
-          if (date.attendees) if (i.id === date.id) {
-            multievent.push(p.color);
-          }
-        }));
+      if (this.data) this.data.forEach(function (person) {
+        return person.dates.forEach(function (date) {
+          var start = new Date(date.start.date || date.start.dateTime);
+          var end = new Date(date.end.date || date.end.dateTime);
+          var weekday = new Date(start).toLocaleString("default", {
+            weekday: "short"
+          }).toLowerCase();
+          var e = {
+            id: date.id,
+            color: person.color,
+            owner: person,
+            e: date,
+            grid: {
+              start: roundTime(start),
+              end: start.getTime() != end.getTime() ? roundTime(end) : roundTime(end.setMinutes(end.getMinutes(), _this.precision)),
+              dur: start.getTime() != end.getTime() ? Math.round(diffMinutes(end, start) / _this.precision) : Math.round((diffMinutes(end, start) + _this.precision) / _this.precision)
+            }
+          };
+          var multievent = [];
+          if (date.attendees) _this.data.forEach(function (p) {
+            return p.dates.forEach(function (i) {
+              if (date.attendees) if (i.id === date.id) {
+                multievent.push(p.color);
+              }
+            });
+          });
 
-        if (multievent.length > 1) {
-          let existAlready = tmp[weekday].find(t => t.id == date.id);
+          if (multievent.length > 1) {
+            var existAlready = tmp[weekday].find(function (t) {
+              return t.id == date.id;
+            });
 
-          if (!existAlready) {
-            e.color = multievent;
-            tmp[weekday].push(e);
-          }
-        } else tmp[weekday].push(e);
-      }));
+            if (!existAlready) {
+              e.color = multievent;
+              tmp[weekday].push(e);
+            }
+          } else tmp[weekday].push(e);
+        });
+      });
       return tmp;
     }
-
   }
-};
-
-/* script */
-const __vue_script__$2 = script$2;
+};/* script */
+var __vue_script__$2 = script$2;
 /* template */
 
-var __vue_render__$2 = function () {
+var __vue_render__$2 = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -597,10 +572,7 @@ var __vue_render__$2 = function () {
 
   return _c('div', {
     staticClass: "cal-wrapper"
-  }, [_c('div', {
-    ref: "cal",
-    staticClass: "cal"
-  }, _vm._l(_vm.concatenatedData, function (value, name, index) {
+  }, [_vm._ssrNode("<div class=\"cal\" data-v-3a6b9c8a>", "</div>", _vm._l(_vm.concatenatedData, function (value, name, index) {
     return _c('calendar-column', {
       key: name,
       attrs: {
@@ -615,7 +587,7 @@ var __vue_render__$2 = function () {
 var __vue_staticRenderFns__$2 = [];
 /* style */
 
-const __vue_inject_styles__$2 = function (inject) {
+var __vue_inject_styles__$2 = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-3a6b9c8a_0", {
     source: ".cal-wrapper[data-v-3a6b9c8a]{height:100%;width:100%;position:relative;border:.1px solid rgba(164,164,164,.25);box-shadow:0 0 25px 5px rgba(135,137,182,.2);border-radius:10px;overflow:hidden}.cal-wrapper *[data-v-3a6b9c8a]{font-weight:lighter;color:#606060}.cal-wrapper .cal[data-v-3a6b9c8a]{overflow-y:scroll;background-color:#fff;height:100%;user-select:none;display:grid;grid-template-columns:repeat(7,1fr);grid-template-rows:300%}",
@@ -626,34 +598,51 @@ const __vue_inject_styles__$2 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$2 = "data-v-3a6b9c8a";
+var __vue_scope_id__$2 = "data-v-3a6b9c8a";
 /* module identifier */
 
-const __vue_module_identifier__$2 = undefined;
+var __vue_module_identifier__$2 = "data-v-3a6b9c8a";
 /* functional template */
 
-const __vue_is_functional_template__$2 = false;
-/* style inject SSR */
-
+var __vue_is_functional_template__$2 = false;
 /* style inject shadow dom */
 
-const __vue_component__$2 = /*#__PURE__*/normalizeComponent({
+var __vue_component__$2 = /*#__PURE__*/normalizeComponent({
   render: __vue_render__$2,
   staticRenderFns: __vue_staticRenderFns__$2
-}, __vue_inject_styles__$2, __vue_script__$2, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, false, createInjector, undefined, undefined);
+}, __vue_inject_styles__$2, __vue_script__$2, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, false, undefined, createInjectorSSR, undefined);// Import vue component
 
-// Import vue component
-
-const install = function installVueGoogleCalendar(Vue) {
+var install = function installVueGoogleCalendar(Vue) {
   if (install.installed) return;
   install.installed = true;
   Vue.component("VueGoogleCalendar", __vue_component__$2);
 }; // Create module definition for Vue.use()
+
+
+var plugin = {
+  install: install
+}; // To auto-install on non-es builds, when vue is found
+// eslint-disable-next-line no-redeclare
+
+/* global window, global */
+
+{
+  var GlobalVue = null;
+
+  if (typeof window !== "undefined") {
+    GlobalVue = window.Vue;
+  } else if (typeof global !== "undefined") {
+    GlobalVue = global.Vue;
+  }
+
+  if (GlobalVue) {
+    GlobalVue.use(plugin);
+  }
+} // Inject install function into component - allows component
 // to be registered via Vue.use() as well as Vue.component()
 
 
 __vue_component__$2.install = install; // Export component by default
 // also be used as directives, etc. - eg. import { RollupDemoDirective } from 'rollup-demo';
 // export const RollupDemoDirective = component;
-
-export default __vue_component__$2;
+exports.default=__vue_component__$2;

@@ -13,12 +13,12 @@
 </template>
 
 <script>
-import CalendarColumn from "./CalendarColumn.vue"
+import CalendarColumn from "./components/CalendarColumn.vue"
 
-import * as fn from "../utils/functions"
+import * as fn from "./utils/functions"
 
 export default {
-  name: "calendar",
+  name: "vue-google-calendar",
   components: { CalendarColumn },
   props: {
     precision: { type: Number, default: 30 },
