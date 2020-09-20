@@ -37,7 +37,7 @@
 <script>
 import CalendarEvent from "./CalendarEvent.vue"
 
-import * as fn from "../utils/functions"
+import * as fn from "../utils"
 
 export default {
   name: "calendarcolumn",

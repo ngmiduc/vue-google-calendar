@@ -15,7 +15,7 @@
 <script>
 import CalendarColumn from "./components/CalendarColumn.vue"
 
-import * as fn from "./utils/functions"
+import * as fn from "./utils"
 
 export default {
   name: "vue-google-calendar",

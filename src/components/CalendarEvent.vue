@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import * as fn from "../utils/functions"
+import * as fn from "../utils"
 
 export default {
   name: "calendareventv2",
