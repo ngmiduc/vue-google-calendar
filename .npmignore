@@ -1,7 +1,10 @@
-/docs/*
-/node_modules/*
-/build/*
-/src/test/*
+/docs
+/node_modules
+/build
+/docs
+/dev
+/src
+
 
 .browserslistrc
 .eslintrc.js
